@@ -73,6 +73,18 @@ public class GoodsControllerImpl extends BaseController   implements GoodsContro
 		
 	}
 	
+//	allGoodsList 추가	(전체상품보기)
+	@RequestMapping(value="/allGoodsList.do" ,method = RequestMethod.GET)
+	public ModelAndView allGoodsList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName=(String)request.getAttribute("viewName");
+		List<GoodsVO> goodsList=goodsService.allGoodsList();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("goodsList", goodsList);
+		return mav;
+		
+
+	}
+	
 	private void addGoodsInQuick(String goods_id,GoodsVO goodsVO,HttpSession session){
 		boolean already_existed=false;
 		List<GoodsVO> quickGoodsList; //최근 본 상품 저장 ArrayList

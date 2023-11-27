@@ -34,34 +34,28 @@
 	<li>
 		<h3>정보내역</h3>
 		<ul>
-			<li><a href="${contextPath}/mypage/myDetailInfo.do">회원정보관리</a></li>
-			<li><a href="#">나의 주소록</a></li>
+			<li><a href="${contextPath}/mypage/myDetailInfoDisabled.do">회원정보관리</a></li>
+			<!-- 주소록 추가 -->
+			<li><a href="${contextPath}/mypage/myAddress.do">나의 주소록</a></li>
 			<li><a href="#">개인정보 동의내역</a></li>
-			<li><a href="#">회원탈퇴</a></li>
+			<li>
+			<form action="${contextPath}/member/deleteMember.do" method="post">
+    			<input type="submit" value="회원탈퇴">
+			</form>
+			</li>
 		</ul>
 	</li>
 </c:when>
 <c:otherwise>
 	<li>
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;국내외 도서</h3>
+		<h3>전체 카테고리</h3>
 		<ul>
-			<li><a href="${contextPath}/goods/goodsList.do">IT/인터넷</a></li>
-			<li><a href="#">경제/경영</a></li>
-			<li><a href="#">대학교재</a></li>
-			<li><a href="#">자기계발</a></li>
-			<li><a href="#">자연과학/공학</a></li>
-			<li><a href="#">역사/인문학</a></li>
-		</ul>
-	</li>
-	<li>
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;음반</h3>
-		<ul>
-			<li><a href="#">가요</a></li>
-			<li><a href="#">록</a></li>
-			<li><a href="#">클래식</a></li>
-			<li><a href="#">뉴에이지</a></li>
-			<li><a href="#">재즈</a></li>
-			<li><a href="#">기타</a></li>
+		<!-- allGoodsList로 수정 -->
+			<li><a href="${contextPath}/goods/allGoodsList.do">전체상품</a></li>
+			<li><a href="#">전통건강식품</a></li>
+			<li><a href="#">일반건강식품</a></li>
+			<li><a href="#">한방차/커피</a></li>
+			<li><a href="#">건강관리용품</a></li>
 		</ul>
 	</li>
  </c:otherwise>

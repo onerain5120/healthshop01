@@ -160,7 +160,8 @@ function fn_cancel_order(order_id){
 
 <br><br><br>	
 <h1>나의 정보
-    <a href="#"> <img  src="${contextPath}/resources/image/btn_more_see.jpg" />  </a>
+<!-- 나의 정보(수정불가) 추가 -->
+    <a href="${contextPath}/mypage/myDetailInfoDisabled.do"> <img  src="${contextPath}/resources/image/btn_more_see.jpg" />  </a>
 </h1>
 <table border=0 width=100% cellpadding=10 cellspacing=10>
   <tr>
