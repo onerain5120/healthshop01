@@ -30,7 +30,7 @@ public class MainController extends BaseController {
 		ModelAndView mav=new ModelAndView();
 		String viewName=(String)request.getAttribute("viewName");
 		mav.setViewName(viewName);
-		
+		//로그인 한 사용자(관리자(admin), 일반 사용자(고객)에 따라 화면의 구성이 달라지게 하기 위해 세션에 저장된 사용자별로 화면 구성을 달리
 		session=request.getSession();
 		session.setAttribute("side_menu", "user");
 		Map<String,List<GoodsVO>> goodsMap=goodsService.listGoods();

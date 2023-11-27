@@ -15,6 +15,13 @@ import com.bookshop01.goods.vo.ImageFileVO;
 public class GoodsDAOImpl  implements GoodsDAO{
 	@Autowired
 	private SqlSession sqlSession;
+	
+//	allGoodsList Ãß°¡	
+	@Override
+	public List<GoodsVO> allGoodsList() throws DataAccessException {
+		List<GoodsVO> goodsList = (ArrayList)sqlSession.selectList("mapper.goods.allGoodsList");
+		return goodsList;
+	}
 
 	@Override
 	public List<GoodsVO> selectGoodsList(String goodsStatus ) throws DataAccessException {

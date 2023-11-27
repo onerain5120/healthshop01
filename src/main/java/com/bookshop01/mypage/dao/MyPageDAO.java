@@ -15,4 +15,6 @@ public interface MyPageDAO {
 	public void updateMyInfo(Map memberMap) throws DataAccessException;
 	public MemberVO selectMyDetailInfo(String member_id) throws DataAccessException;
 	public void updateMyOrderCancel(String order_id) throws DataAccessException;
+	//나의 주소록 추가
+	public MemberVO selectMyAddress(String member_id) throws DataAccessException;
 }

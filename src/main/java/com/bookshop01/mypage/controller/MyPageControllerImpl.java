@@ -112,6 +112,19 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		return mav;
 	}
 	
+	
+	//내 정보(수정불가)
+	@Override
+	@RequestMapping(value="/myDetailInfoDisabled.do",method = RequestMethod.GET)
+	public ModelAndView myDetailInfoDisabled(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+	
+	
+	
 	@Override
 	@RequestMapping(value="/myDetailInfo.do" ,method = RequestMethod.GET)
 	public ModelAndView myDetailInfo(HttpServletRequest request, HttpServletResponse response)  throws Exception {
@@ -135,12 +148,6 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 			memberMap.put("member_birth_y",val[0]);
 			memberMap.put("member_birth_m",val[1]);
 			memberMap.put("member_birth_d",val[2]);
-			memberMap.put("member_birth_gn",val[3]);
-		}else if(attribute.equals("tel")){
-			val=value.split(",");
-			memberMap.put("tel1",val[0]);
-			memberMap.put("tel2",val[1]);
-			memberMap.put("tel3",val[2]);
 		}else if(attribute.equals("hp")){
 			val=value.split(",");
 			memberMap.put("hp1",val[0]);
@@ -175,6 +182,15 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		message  = "mod_success";
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
-	}	
+	}
+	
+	//나의 주소록 추가
+	@Override
+	@RequestMapping(value="/myAddress.do",method = RequestMethod.GET)
+	public ModelAndView myAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
 	
 }

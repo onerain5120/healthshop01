@@ -59,6 +59,9 @@
         }).open();
     }
 
+    function goBack() {
+    	window.location.href = "${contextPath}/mypage/myDetailInfoDisabled.do";
+    }
    
    window.onload=function()
     {
@@ -99,9 +102,9 @@ function fn_modify_member_info(attribute){
 	// alert("mod_type:"+mod_type);
 		var frm_mod_member=document.frm_mod_member;
 		if(attribute=='member_pw'){
-			value=frm_mod_member.member_pw.value;
+			var value_pw=frm_mod_member.member_pw.value;
 			//alert("member_pw:"+value);
-		}else if(attribute=='member_gender'){
+		}/* else if(attribute=='member_gender'){
 			var member_gender=frm_mod_member.member_gender;
 			for(var i=0; member_gender.length;i++){
 			 	if(member_gender[i].checked){
@@ -110,7 +113,7 @@ function fn_modify_member_info(attribute){
 				} 
 			}
 			
-		}else if(attribute=='member_birth'){
+		} */else if(attribute=='member_birth'){
 			var member_birth_y=frm_mod_member.member_birth_y;
 			var member_birth_m=frm_mod_member.member_birth_m;
 			var member_birth_d=frm_mod_member.member_birth_d;
@@ -158,7 +161,7 @@ function fn_modify_member_info(attribute){
 			}
 			value_tel2=tel2.value;
 			value_tel3=tel3.value;
-			value=value_tel1+","+value_tel2+", "+value_tel3;
+			value=value_tel1+","+value_tel2+","+value_tel3;
 		}else if(attribute=='hp'){
 			var hp1=frm_mod_member.hp1;
 			var hp2=frm_mod_member.hp2;
@@ -174,7 +177,7 @@ function fn_modify_member_info(attribute){
 			value_hp2=hp2.value;
 			value_hp3=hp3.value;
 			value_smssts_yn=smssts_yn.checked;
-			value=value_hp1+","+value_hp2+", "+value_hp3+","+value_smssts_yn;
+			value=value_hp1+","+value_hp2+","+value_hp3+","+value_smssts_yn;
 		}else if(attribute=='email'){
 			var email1=frm_mod_member.email1;
 			var email2=frm_mod_member.email2;
@@ -198,15 +201,40 @@ function fn_modify_member_info(attribute){
 			value=value_zipcode+","+value_roadAddress+","+value_jibunAddress+","+value_namujiAddress;
 		}
 		console.log(attribute);
-	 
+	 	
+		var data = {
+		        attribute: 'multiple_attributes',  // 여러 속성을 수정하는 요청임을 나타내는 값
+		        value_pw: value_pw,
+
+		        value_birth_y: value_birth_y,
+		        value_birth_m: value_birth_m,
+		        value_birth_d: value_birth_d,
+		        value_birth_gn: value_birth_gn,
+
+		        value_tel1: value_tel1,
+		        value_tel2: value_tel2,
+		        value_tel3: value_tel3,
+
+		        value_hp1: value_hp1,
+		        value_hp2: value_hp2,
+		        value_hp3: value_hp3,
+		        value_smssts_yn: value_smssts_yn,
+
+		        value_email1: value_email1,
+		        value_email2: value_email2,
+		        value_emailsts_yn: value_emailsts_yn,
+
+		        value_zipcode: value_zipcode,
+		        value_roadAddress: value_roadAddress,
+		        value_jibunAddress: value_jibunAddress,
+		        value_namujiAddress: value_namujiAddress,
+		    };
+		
 		$.ajax({
 			type : "post",
 			async : false, //false인 경우 동기식으로 처리한다.
 			url : "${contextPath}/mypage/modifyMyInfo.do",
-			data : {
-				attribute:attribute,
-				value:value,
-			},
+			data : data,
 			success : function(data, textStatus) {
 				if(data.trim()=='mod_success'){
 					alert("회원 정보를 수정했습니다.");
@@ -246,14 +274,14 @@ function fn_modify_member_info(attribute){
 					<td>
 					  <input name="member_pw" type="password" size="20" value="${memberInfo.member_pw }" />
 					</td>
-					<td>
+					<!-- <td>
 					  <input type="button" value="수정하기" onClick="fn_modify_member_info('member_pw')" />
-					</td>
+					</td> -->
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">이름</td>
 					<td>
-					  <input name="member_name" type="text" size="20" value="${memberInfo.member_name }"  disabled />
+					  <input name="member_name" type="text" size="20" value="${memberInfo.member_name.substring(0, 1)}*${memberInfo.member_name.substring(2)}""  disabled />
 					 </td>
 					 <td>
 					</td>
@@ -265,18 +293,18 @@ function fn_modify_member_info(attribute){
 					    <c:when test="${memberInfo.member_gender =='101' }">
 					      <input type="radio" name="member_gender" value="102" />
 						  여성 <span style="padding-left:30px"></span>
-					   <input type="radio" name="member_gender" value="101" checked />남성
+					   <input type="radio" name="member_gender" value="101" checked disabled />남성
 					    </c:when>
 					    <c:otherwise>
-					      <input type="radio" name="member_gender" value="102"  checked />
+					      <input type="radio" name="member_gender" value="102"  checked disabled />
 						   여성 <span style="padding-left:30px"></span>
-					      <input type="radio" name="member_gender" value="101"  />남성
+					      <input type="radio" name="member_gender" value="101" disabled  />남성
 					   </c:otherwise>
 					   </c:choose>
 					</td>
-					<td>
+					<!-- <td>
 					  <input type="button" value="수정하기" onClick="fn_modify_member_info('member_gender')" />
-					</td>
+					</td> -->
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">법정생년월일</td>
@@ -330,9 +358,9 @@ function fn_modify_member_info(attribute){
 						</c:otherwise>
 						</c:choose>
 					</td>
-					<td>
+					<!-- <td>
 					  <input type="button" value="수정하기" onClick="fn_modify_member_info('member_birth')" />
-					</td>
+					</td> -->
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">전화번호</td>
@@ -367,9 +395,9 @@ function fn_modify_member_info(attribute){
 					    - <input type="text" size=4  name="tel2" value="${memberInfo.tel2 }"> 
 					    - <input type="text" size=4  name="tel3" value="${memberInfo.tel3 }">
 					</td>
-					<td>
+					<!-- <td>
 					  <input type="button" value="수정하기" onClick="fn_modify_member_info('tel')" />
-					</td>
+					</td> -->
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">휴대폰번호</td>
@@ -394,9 +422,9 @@ function fn_modify_member_info(attribute){
 						</c:otherwise>
 					 </c:choose>	
 				    </td>
-					<td>
+					<!-- <td>
 					  <input type="button" value="수정하기" onClick="fn_modify_member_info('hp')" />
-					</td>	
+					</td>	 -->
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">이메일<br>(e-mail)</td>
@@ -425,9 +453,9 @@ function fn_modify_member_info(attribute){
 						</c:otherwise>
 					 </c:choose>
 					</td>
-					<td>
+					<!-- <td>
 					  <input type="button" value="수정하기" onClick="fn_modify_member_info('email')" />
-					</td>
+					</td> -->
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">주소</td>
@@ -440,9 +468,9 @@ function fn_modify_member_info(attribute){
 					  나머지 주소: <input type="text"  name="namujiAddress" size="50" value="${memberInfo.namujiAddress }" />
 					   </p>
 					</td>
-					<td>
+					<!-- <td>
 					  <input type="button" value="수정하기" onClick="fn_modify_member_info('address')" />
-					</td>
+					</td> -->
 				</tr>
 			</tbody>
 		</table>
@@ -452,8 +480,9 @@ function fn_modify_member_info(attribute){
 		<table align=center>
 		<tr>
 			<td >
+				<input name="btn_cancel_member" type="button" onclick=fn_modify_member_info(attribute) value="수정 완료">
 				<input type="hidden" name="command"  value="modify_my_info" /> 
-				<input name="btn_cancel_member" type="button"  value="수정 취소">
+				<input name="btn_cancel_member" type="button" onclick=goBack() value="수정 취소">
 			</td>
 		</tr>
 	</table>

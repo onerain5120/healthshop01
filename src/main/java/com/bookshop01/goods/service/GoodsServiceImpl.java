@@ -50,5 +50,11 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsList;
 	}
 	
+//	allGoodsList Ãß°¡	
+	public List<GoodsVO> allGoodsList() throws Exception{
+		List allgoodsList=goodsDAO.allGoodsList();
+		return allgoodsList;
+	}
+	
 	
 }

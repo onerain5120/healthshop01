@@ -100,4 +100,12 @@
                                       
    ]]>      
   </insert>
+  
+  <update id="deleteMember" parameterType="memberVO">
+  <![CDATA[
+  	update t_shopping_member
+	set del_yn = 'Y'
+	where member_id = #{member_id}
+  ]]>
+  </update>
 </mapper>

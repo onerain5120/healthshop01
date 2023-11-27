@@ -19,6 +19,16 @@
        <put-attribute name="title" value="내 정보 상세 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/myDetailInfo.jsp" />
      </definition>
+     <!-- 내 정보(수정불가) 보기 창 추가 -->
+      <definition name="/mypage/myDetailInfoDisabled" extends="baseLayout">
+       <put-attribute name="title" value="내 정보 상세 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/mypage/myDetailInfoDisabled.jsp" />
+     </definition>
+     <!-- 내 주소록 추가 -->
+     <definition name="/mypage/myAddress" extends="baseLayout">
+       <put-attribute name="title" value="나의 주소록" />
+       <put-attribute name="body" value="/WEB-INF/views/mypage/myAddress.jsp" />
+     </definition>
 </tiles-definitions>
 
 
